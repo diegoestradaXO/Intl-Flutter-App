@@ -1,0 +1,14 @@
+{
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    },
+    "appBarTitle": "Internationalized Flutter App",
+    "@appBarTitle": {
+      "description": "The title in english"
+    },
+    "counterFeedbackText": "You have pushed the button this many times:",
+    "@counterFeedbackText": {
+      "description": "The feedback text in english"
+    }
+}

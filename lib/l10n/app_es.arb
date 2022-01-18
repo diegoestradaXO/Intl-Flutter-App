@@ -1,5 +1,9 @@
 {
     "helloWorld": "Hola Mundo!",
     "appBarTitle": "Aplicación de Flutter Internacional",
-    "counterFeedbackText": "Has presionado el botón esta cantidad de veces:"
+    "counterFeedbackText": "Has presionado el botón esta cantidad de veces:",
+    "drawerTitle": "Menu Principal",
+    "drawerMessageItem": "Mensajes",
+    "drawerSettingsItem": "Ajustes"
+
 }

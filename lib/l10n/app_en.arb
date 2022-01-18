@@ -10,5 +10,17 @@
     "counterFeedbackText": "You have pushed the button this many times:",
     "@counterFeedbackText": {
       "description": "The feedback text in english"
+    },
+    "drawerTitle": "Main Menu",
+    "@drawerTitle": {
+      "description": "-"
+    },
+    "drawerMessageItem": "Messages",
+    "@drawerMessageItem": {
+      "description": "-"
+    },
+    "drawerSettingsItem": "Settings",
+    "@drawerSettingsItem": {
+      "description": "-"
     }
 }

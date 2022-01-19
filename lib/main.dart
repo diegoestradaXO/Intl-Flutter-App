@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // getting the localizations generated using the arb files
 import 'package:intl_flutter_app/card.dart';
+import 'package:intl_flutter_app/task_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -105,43 +106,63 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
             color: Color(0xfff6f5f8),
             width: double.infinity,
-            padding: EdgeInsets.all(24.0),
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
             child: Stack(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
+                      margin: EdgeInsets.only(bottom: 20.0, top: 20.0),
                       child: Center(
                           child: Text(
                         AppLocalizations.of(context)!.taskScreenTitle,
                         textAlign: TextAlign.center,
                       )),
                     ),
-                    TaskCard(
-                      // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                      description: 'No cap',
-                    ),
-                    TaskCard(
-                      // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                      description: 'sus',
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          TaskCard(
+                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
+                            description: 'No cap',
+                          ),
+                          TaskCard(
+                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
+                            description: 'sus',
+                          ),
+                          TaskCard(
+                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
+                            description: 'sus',
+                          ),
+                          TaskCard(
+                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
+                            description: 'sus',
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
                 Positioned(
-                  bottom: 0.0,
+                  /// Floating action button
+                  bottom: 20.0,
                   right: 0.0,
-                  child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xFF2e2f43),
-                    borderRadius: BorderRadius.circular(25),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TaskScreen()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2e2f43),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Image(
+                        width: 60,
+                        image: AssetImage("assets/images/add_icon.png"),
+                      ),
+                    ),
                   ),
-                  child: Image(
-                    width: 60,
-                    image: AssetImage("assets/images/add_icon.png"),
-                  ),
-                ),
                 )
               ],
             )),

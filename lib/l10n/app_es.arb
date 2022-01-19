@@ -6,5 +6,7 @@
     "drawerMessageItem": "Mensajes",
     "drawerSettingsItem": "Ajustes",
     "untitledTaskPlaceHolder": "(Tarea sin nombre)",
-    "taskScreenTitle": "Mis tareas"
+    "taskScreenTitle": "Mis tareas",
+    "taskTitleTextAreaHint": "Escribe un título...",
+    "taskDescriptionTextAreaHint": "Escribe una descripción para esta tarea ..."
 }

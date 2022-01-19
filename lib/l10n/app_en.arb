@@ -30,5 +30,13 @@
     "taskScreenTitle": "My Tasks",
     "@taskScreenTitle": {
       "description": "-"
+    },
+    "taskTitleTextAreaHint": "Write a task title ...",
+    "@taskTitleTextAreaHint": {
+      "description": "-"
+    },
+    "taskDescriptionTextAreaHint": "Enter a description for this task ...",
+    "@taskDescriptionTextAreaHint": {
+      "description": "-"
     }
 }

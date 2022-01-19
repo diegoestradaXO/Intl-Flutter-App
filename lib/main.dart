@@ -125,11 +125,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           TaskCard(
                             // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                            description: 'No cap',
+                            title: 'Lorem Ipsum',
+                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet. In placerat ullamcorper magna, non fermentum est porttitor in. Vestibulum sit amet gravida nisi. Phasellus vitae dolor et quam aliquet rutrum.',
                           ),
                           TaskCard(
                             // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                            description: 'sus',
+                            title: 'Lorem Ipsum 2',
+                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet.',
                           ),
                           TaskCard(
                             // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,

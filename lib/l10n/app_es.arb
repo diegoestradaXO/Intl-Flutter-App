@@ -4,6 +4,7 @@
     "counterFeedbackText": "Has presionado el botón esta cantidad de veces:",
     "drawerTitle": "Menu Principal",
     "drawerMessageItem": "Mensajes",
-    "drawerSettingsItem": "Ajustes"
-
+    "drawerSettingsItem": "Ajustes",
+    "untitledTaskPlaceHolder": "(Tarea sin nombre)",
+    "taskScreenTitle": "Mis tareas"
 }

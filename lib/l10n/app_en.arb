@@ -22,5 +22,13 @@
     "drawerSettingsItem": "Settings",
     "@drawerSettingsItem": {
       "description": "-"
+    },
+    "untitledTaskPlaceHolder": "(Unnamed task)",
+    "@untitledTaskPlaceHolder": {
+      "description": "This goes whenever the user does not especify the title for a task card"
+    },
+    "taskScreenTitle": "My Tasks",
+    "@taskScreenTitle": {
+      "description": "-"
     }
 }

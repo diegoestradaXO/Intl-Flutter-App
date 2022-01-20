@@ -121,8 +121,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: ListView.builder(
                                 itemCount: snapshot.data?.length,
                                 itemBuilder: (context, index){
-                                  return TaskCard(
-                                    title: snapshot.data?[index].title
+                                  return GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(
+                                        context, 
+                                        MaterialPageRoute(builder: (context) => TaskScreen(
+                                          task: snapshot.data?[index]
+                                        )));
+                                    },
+                                    child: TaskCard(
+                                    title: snapshot.data?[index].title,
+                                    // description: snapshot.data?[index].description,
+                                  )
                                   );
                                 },
                               )
@@ -143,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TaskScreen())).then((value) => setState(() {}));
+                              builder: (context) => TaskScreen(task: null))).then((value) => setState(() {}));
                     },
                     child: Container(
                       decoration: BoxDecoration(

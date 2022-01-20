@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl_flutter_app/database_helper.dart';
 import 'package:intl_flutter_app/todo.dart';
+
+import 'models/task.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -44,8 +47,16 @@ class _TaskScreenState extends State<TaskScreen> {
                     ),
                     Expanded(
                       child: TextField(
-                        onSubmitted: (value){
-                          print(value);
+                        onSubmitted: (value) async {
+                          if(value != ""){
+                            DatabaseHelper _dbhelper = DatabaseHelper();
+                            Task _newTask = Task(
+                              title: value
+                            );
+                            await _dbhelper.insertTask(_newTask);
+
+                            print("The task has been created");
+                          }
                         },
                         decoration: InputDecoration(
                           hintText: t!.taskTitleTextAreaHint,

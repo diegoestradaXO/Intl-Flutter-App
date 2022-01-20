@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // getting the localizations generated using the arb files
 import 'package:intl_flutter_app/card.dart';
+import 'package:intl_flutter_app/database_helper.dart';
 import 'package:intl_flutter_app/task_screen.dart';
+
+import 'models/task.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,18 +45,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  DatabaseHelper _dbhelper = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -121,33 +113,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       )),
                     ),
                     Expanded(
-                      child: ScrollConfiguration(
-                        behavior: NoGlowBehaviour(),
-                        child: ListView(
-                        children: [
-                          TaskCard(
-                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                            title: 'Lorem Ipsum',
-                            description:
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet. In placerat ullamcorper magna, non fermentum est porttitor in. Vestibulum sit amet gravida nisi. Phasellus vitae dolor et quam aliquet rutrum.',
-                          ),
-                          TaskCard(
-                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                            title: 'Lorem Ipsum 2',
-                            description:
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet.',
-                          ),
-                          TaskCard(
-                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                            description: 'sus',
-                          ),
-                          TaskCard(
-                            // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
-                            description: 'sus',
-                          )
-                        ],
-                      ),
-                      )
+                      child: FutureBuilder(
+                          future: _dbhelper.getTasks(),
+                          builder: (context, AsyncSnapshot<List<Task>> snapshot){
+                            return ScrollConfiguration(
+                              behavior: NoGlowBehaviour(),
+                                child: ListView.builder(
+                                itemCount: snapshot.data?.length,
+                                itemBuilder: (context, index){
+                                  return TaskCard(
+                                    title: snapshot.data?[index].title
+                                  );
+                                },
+                              )
+                            );
+                            
+                          },
+                        )
+                      
                     )
                   ],
                 ),
@@ -160,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TaskScreen()));
+                              builder: (context) => TaskScreen())).then((value) => setState(() {}));
                     },
                     child: Container(
                       decoration: BoxDecoration(

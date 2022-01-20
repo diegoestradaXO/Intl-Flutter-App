@@ -99,12 +99,6 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
                 TodoWidget(
                   text: 'Pasear al perro',
-                  isDone: true,
-                ),
-                TodoWidget(
-                  isDone: false,
-                ),
-                TodoWidget(
                   isDone: false,
                 )
               ],
@@ -124,7 +118,14 @@ class _TaskScreenState extends State<TaskScreen> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color(0xffd62828),
+                    gradient: LinearGradient(
+                          colors: [
+                            Color(0xffdd5858),
+                            Color(0xffd62828),
+                          ],
+                          begin: Alignment(0.0, -1.0),
+                          end: Alignment(0.0, 1.0),
+                        ),
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Image(

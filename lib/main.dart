@@ -78,13 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ), //ToDo: make this a localized message
             ),
             ListTile(
-              leading: Icon(Icons.message),
-              title: Text(AppLocalizations.of(context)!.drawerMessageItem),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.settings),
               title: Text(AppLocalizations.of(context)!.drawerSettingsItem),
               onTap: () {

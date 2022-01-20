@@ -121,17 +121,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       )),
                     ),
                     Expanded(
-                      child: ListView(
+                      child: ScrollConfiguration(
+                        behavior: NoGlowBehaviour(),
+                        child: ListView(
                         children: [
                           TaskCard(
                             // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
                             title: 'Lorem Ipsum',
-                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet. In placerat ullamcorper magna, non fermentum est porttitor in. Vestibulum sit amet gravida nisi. Phasellus vitae dolor et quam aliquet rutrum.',
+                            description:
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet. In placerat ullamcorper magna, non fermentum est porttitor in. Vestibulum sit amet gravida nisi. Phasellus vitae dolor et quam aliquet rutrum.',
                           ),
                           TaskCard(
                             // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
                             title: 'Lorem Ipsum 2',
-                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet.',
+                            description:
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla turpis ut risus feugiat laoreet.',
                           ),
                           TaskCard(
                             // placeholder: AppLocalizations.of(context)!.untitledTaskPlaceHolder,
@@ -143,6 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         ],
                       ),
+                      )
                     )
                   ],
                 ),
@@ -151,12 +156,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   bottom: 20.0,
                   right: 0.0,
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => TaskScreen()));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TaskScreen()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xFF2e2f43),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xff61627c),
+                            Color(0xff2e2f43),
+                          ],
+                          begin: Alignment(0.0, -1.0),
+                          end: Alignment(0.0, 1.0),
+                        ),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Image(

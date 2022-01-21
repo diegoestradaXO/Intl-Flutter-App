@@ -105,6 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                         AppLocalizations.of(context)!.taskScreenTitle,
                         textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold
+                        ),
                       )),
                     ),
                     Expanded( //
@@ -127,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     },
                                     child: TaskCard(
                                       title: snapshot.data?[index].title,
-                                      // description: snapshot.data?[index].description,
+                                      //description: snapshot.data?[index].description,
                                     ));
                               },
                             ));

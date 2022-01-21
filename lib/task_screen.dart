@@ -17,11 +17,13 @@ class TaskScreen extends StatefulWidget {
 
 class _TaskScreenState extends State<TaskScreen> {
   DatabaseHelper _dbhelper = DatabaseHelper();
+  int? _taskId = 0;
   String? _taskTitle = "";
   @override
   void initState() {
     if (widget.task != null) {
       _taskTitle = widget.task?.title;
+      _taskId = widget.task?.id;
       print('helo');
     }
     print("ID: ${widget.task?.id}");
@@ -99,7 +101,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
                 FutureBuilder(
                   // initialData: [],
-                  future: _dbhelper.getTodos(),
+                  future: _dbhelper.getTodos(_taskId),
                   builder: (context, AsyncSnapshot<List<Todo>> snapshot){
                     return Expanded(
                       child: ListView.builder(
@@ -124,8 +126,7 @@ class _TaskScreenState extends State<TaskScreen> {
                             color: Colors.transparent,
                             border:
                                 Border.all(color: Color(0xFF2e2f43), width: 2)),
-                        child: Image(
-                            image: AssetImage("assets/images/check_icon.png")),
+                        
                       ),
                       Expanded(
                         child: TextField(

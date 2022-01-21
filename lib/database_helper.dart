@@ -4,17 +4,19 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'models/task.dart';
+import 'models/todo.dart';
 
 class DatabaseHelper {
   Future<Database> database() async {
     return openDatabase(
       join(await getDatabasesPath(), 'tasksApp.db'),
-      onCreate: (db, version) {
+      onCreate: (db, version) async {
         // Run the CREATE TABLE statement on the database.
-        return db.execute(
-          'CREATE TABLE tasks(id INTEGER PRIMARY KEY, title TEXT, description TEXT)',
-        );
+        await db.execute('CREATE TABLE tasks(id INTEGER PRIMARY KEY, title TEXT, description TEXT)',);
+        await db.execute('CREATE TABLE todo(id INTEGER PRIMARY KEY, taskId INTEGER, title TEXT, isDone INTEGER)',); // 0 false, 1 true
+        return Future.value();
       },
+      
       version: 1,
     );
   }
@@ -29,6 +31,19 @@ class DatabaseHelper {
     List<Map<String, dynamic>> taskMap = await _db.query('tasks');
     return List.generate(taskMap.length, (index){
       return Task(id: taskMap[index]['id'], title: taskMap[index]['title'], description: taskMap[index]['description']);
+    });
+  }
+
+  Future<void> insertTodo(Todo todo) async {
+    Database _db = await database();
+    await _db.insert('todo', todo.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<List<Todo>> getTodos() async {
+    Database _db = await database();
+    List<Map<String, dynamic>> todoMap = await _db.query('todo');
+    return List.generate(todoMap.length, (index){
+      return Todo(id: todoMap[index]['id'], taskId: todoMap[index]['taskId'] ,title: todoMap[index]['title'], isDone: todoMap[index]['isDone']);
     });
   }
 

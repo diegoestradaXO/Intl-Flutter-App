@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoWidget extends StatelessWidget {
 
@@ -8,6 +9,7 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context);
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 7.0,
@@ -27,7 +29,7 @@ class TodoWidget extends StatelessWidget {
             child: Image(image: AssetImage("assets/images/check_icon.png")),
           ),
           Text(
-            text ?? '(Unnamed toDo)',
+            text ?? t!.unnamedToDoPlaceHolder,
             style: TextStyle(
               color: isDone ? Color(0xFF2e2f43) : Colors.black,
               fontWeight: isDone ? FontWeight.bold : FontWeight.w400

@@ -8,5 +8,6 @@
     "untitledTaskPlaceHolder": "(Tarea sin nombre)",
     "taskScreenTitle": "Mis tareas",
     "taskTitleTextAreaHint": "Escribe un título...",
-    "taskDescriptionTextAreaHint": "Escribe una descripción para esta tarea ..."
+    "taskDescriptionTextAreaHint": "Escribe una descripción para esta tarea ...",
+    "unnamedToDoPlaceHolder": "(toDo sin nombre)"
 }

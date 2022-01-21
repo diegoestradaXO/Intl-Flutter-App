@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl_flutter_app/database_helper.dart';
+import 'package:intl_flutter_app/models/todo.dart';
 import 'package:intl_flutter_app/todo.dart';
 
 import 'models/task.dart';
@@ -15,17 +16,20 @@ class TaskScreen extends StatefulWidget {
 }
 
 class _TaskScreenState extends State<TaskScreen> {
+  DatabaseHelper _dbhelper = DatabaseHelper();
   String? _taskTitle = "";
   @override
   void initState() {
-    if(widget.task != null){
+    if (widget.task != null) {
       _taskTitle = widget.task?.title;
+      print('helo');
     }
     print("ID: ${widget.task?.id}");
   }
 
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context);
+
     return Scaffold(
         // appBar: AppBar(
         //   backgroundColor: Color(0xFF2e2f43),
@@ -93,14 +97,65 @@ class _TaskScreenState extends State<TaskScreen> {
                         contentPadding: EdgeInsets.symmetric(horizontal: 24.0)),
                   ),
                 ),
-                TodoWidget(
-                  text: 'Sacar la basura',
-                  isDone: true,
+                FutureBuilder(
+                  // initialData: [],
+                  future: _dbhelper.getTodos(),
+                  builder: (context, AsyncSnapshot<List<Todo>> snapshot){
+                    return Expanded(
+                      child: ListView.builder(
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        return TodoWidget(text: snapshot.data?[index].title,isDone: false);
+                      }
+                      ),
+                    );
+                  },
+                    ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        width: 25.0,
+                        height: 25.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: Colors.transparent,
+                            border:
+                                Border.all(color: Color(0xFF2e2f43), width: 2)),
+                        child: Image(
+                            image: AssetImage("assets/images/check_icon.png")),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          onSubmitted: (value) async {
+                            if (value != "") {
+                              //check is the task is null
+                              if (widget.task != null) {
+                                DatabaseHelper _dbhelper = DatabaseHelper();
+                                Todo _newTodo = Todo(
+                                    taskId: widget.task?.id,
+                                    title: value,
+                                    isDone: 0);
+                                await _dbhelper.insertTodo(_newTodo);
+                                setState(() {});
+
+                                print("The todo has been created");
+                              } else {
+                                print('Task does not exist');
+                              }
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter a toDo item ...',
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                TodoWidget(
-                  text: 'Pasear al perro',
-                  isDone: false,
-                )
               ],
             ),
             Positioned(
@@ -119,13 +174,13 @@ class _TaskScreenState extends State<TaskScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                          colors: [
-                            Color(0xffdd5858),
-                            Color(0xffd62828),
-                          ],
-                          begin: Alignment(0.0, -1.0),
-                          end: Alignment(0.0, 1.0),
-                        ),
+                      colors: [
+                        Color(0xffdd5858),
+                        Color(0xffd62828),
+                      ],
+                      begin: Alignment(0.0, -1.0),
+                      end: Alignment(0.0, 1.0),
+                    ),
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Image(

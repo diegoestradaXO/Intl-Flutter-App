@@ -38,5 +38,9 @@
     "taskDescriptionTextAreaHint": "Enter a description for this task ...",
     "@taskDescriptionTextAreaHint": {
       "description": "-"
+    },
+    "unnamedToDoPlaceHolder": "(Unnamed toDo)",
+    "@unnamedToDoPlaceHolder": {
+      "description": "This goes whenever the user does not especify the title for a toDo"
     }
 }

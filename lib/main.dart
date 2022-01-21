@@ -127,11 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                           MaterialPageRoute(
                                               builder: (context) => TaskScreen(
                                                   task:
-                                                      snapshot.data?[index])));
+                                                      snapshot.data?[index]))).then((value) => setState(() {}));
                                     },
                                     child: TaskCard(
                                       title: snapshot.data?[index].title,
-                                      //description: snapshot.data?[index].description,
+                                      description: snapshot.data?[index].description,
                                     ));
                               },
                             ));

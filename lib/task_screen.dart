@@ -19,11 +19,13 @@ class _TaskScreenState extends State<TaskScreen> {
   DatabaseHelper _dbhelper = DatabaseHelper();
   int? _taskId = 0;
   String? _taskTitle = "";
+  String? _taskDescription = "";
   @override
   void initState() {
     if (widget.task != null) {
       _taskTitle = widget.task?.title;
       _taskId = widget.task?.id;
+      _taskDescription = widget.task?.description;
       print('helo');
     }
     print("ID: ${widget.task?.id}");
@@ -73,7 +75,7 @@ class _TaskScreenState extends State<TaskScreen> {
 
                               print("The task has been created");
                             } else {
-                              print('gonna update existing task');
+                              await _dbhelper.updateTaskTitle(_taskId!, value);
                             }
                           }
                         },
@@ -93,6 +95,10 @@ class _TaskScreenState extends State<TaskScreen> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: TextField(
+                    controller: TextEditingController()..text = _taskDescription!,
+                    onSubmitted: (value){
+                      _dbhelper.updateTaskDescription(_taskId!, value);
+                    },
                     decoration: InputDecoration(
                         hintText: t.taskDescriptionTextAreaHint,
                         border: InputBorder.none,

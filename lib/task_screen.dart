@@ -28,7 +28,7 @@ class _TaskScreenState extends State<TaskScreen> {
       _taskDescription = widget.task?.description;
       print('helo');
     }
-    print("ID: ${widget.task?.id}");
+    print("ID: ${widget.task?.description}");
   }
 
   Widget build(BuildContext context) {
@@ -71,7 +71,11 @@ class _TaskScreenState extends State<TaskScreen> {
                             if (widget.task == null) {
                               DatabaseHelper _dbhelper = DatabaseHelper();
                               Task _newTask = Task(title: value);
-                              await _dbhelper.insertTask(_newTask);
+                              _taskId = await _dbhelper.insertTask(_newTask);
+                              print('This is the task id $_taskId');
+                              setState(() {
+                                _taskTitle = value;
+                              });
 
                               print("The task has been created");
                             } else {
@@ -95,9 +99,15 @@ class _TaskScreenState extends State<TaskScreen> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: TextField(
-                    controller: TextEditingController()..text = _taskDescription!,
+                    controller: TextEditingController()..text = _taskDescription ?? ' ',
                     onSubmitted: (value){
-                      _dbhelper.updateTaskDescription(_taskId!, value);
+                      
+                      if(value != ""){
+                        if (_taskId != 0) {
+                          _dbhelper.updateTaskDescription(_taskId!, value);
+                        }
+                      }
+                      
                     },
                     decoration: InputDecoration(
                         hintText: t.taskDescriptionTextAreaHint,
